@@ -180,7 +180,7 @@ public class InfoBoard extends JPanel {
 
         cmbSize = new JComboBox<>(boardSizes);
         cmbSize.setFont(fontNormal);
-        cmbSize.setPreferredSize(new Dimension(106, 28));
+        cmbSize.setPreferredSize(new Dimension(50, 28));
         gbc.gridx = 1;
         gbc.gridy = 6;
         pnlComponent.add(cmbSize, gbc);
@@ -200,6 +200,7 @@ public class InfoBoard extends JPanel {
 
         btnNewGame = new JButton("Uus mäng");
         btnNewGame.setFont(fontNormal);
+        btnNewGame.setPreferredSize(new Dimension(150, 28));
         gbc.gridx = 1;
         gbc.gridy = 7;
         gbc.gridheight = 1;
@@ -207,7 +208,7 @@ public class InfoBoard extends JPanel {
 
         btnScoreBoard = new JButton("Edetabel");
         btnScoreBoard.setFont(fontNormal);
-        //btnScoreBoard.setPreferredSize(new Dimension(150, 28));
+        btnScoreBoard.setPreferredSize(new Dimension(150, 28));
         gbc.gridx = 1;
         gbc.gridy = 8;
         pnlComponent.add(btnScoreBoard, gbc);
@@ -217,7 +218,7 @@ public class InfoBoard extends JPanel {
     private void setupRadioButtons() {
         JLabel label = new JLabel("Edetabeli Sisu");
         label.setFont(fontBold);
-        label.setPreferredSize(new Dimension(106, 28));
+        label.setPreferredSize(new Dimension(150, 28));
         gbc.gridx = 0;
         gbc.gridy = 9;
         pnlComponent.add(label, gbc);
@@ -257,6 +258,54 @@ public class InfoBoard extends JPanel {
     }
     //GETTERS
 
+
+    public JLabel getLblMouseXY() {
+        return lblMouseXY;
+    }
+
+    public JLabel getLblID() {
+        return lblID;
+    }
+
+    public JLabel getLblRowCol() {
+        return lblRowCol;
+    }
+
+    public JLabel getLblTime() {
+        return lblTime;
+    }
+
+    public JLabel getLblShip() {
+        return lblShip;
+    }
+
+    public JLabel getLblGameBoard() {
+        return lblGameBoard;
+    }
+
+    public JComboBox<String> getCmbSize() {
+        return cmbSize;
+    }
+
+    public JButton getBtnNewGame() {
+        return btnNewGame;
+    }
+
+    public JButton getBtnScoreBoard() {
+        return btnScoreBoard;
+    }
+
+    public JRadioButton getRdoFile() {
+        return rdoFile;
+    }
+
+    public JRadioButton getRdoDb() {
+        return rdoDb;
+    }
+
+    public JCheckBox getChkWhere() {
+        return chkWhere;
+    }
 
     public JPanel getPnlComponent() {
         return pnlComponent;
