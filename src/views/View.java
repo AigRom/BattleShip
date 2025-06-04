@@ -31,6 +31,16 @@ public class View  extends JFrame {
         container.add(infoBoard, BorderLayout.EAST); //teadete tahvel vasakule serva
 
         add(container);
-
+        //Test Farame ja Panel managerid
+        System.out.println("JFrame:" + this.getLayout());
+        System.out.println("container    " + container.getLayout());
+        System.out.println("GameBoard    " + gameBoard.getLayout());
+        System.out.println("InfoBoard    " + infoBoard.getLayout());
+        System.out.println("pnlComponents" + infoBoard.getPnlComponent().getLayout());
+//        JFrame:java.awt.BorderLayout[hgap=0,vgap=0]
+//        containerjava.awt.BorderLayout[hgap=0,vgap=0]
+//        GameBoardjava.awt.FlowLayout[hgap=5,vgap=5,align=center]
+//        InfoBoardjava.awt.FlowLayout[hgap=5,vgap=5,align=left]
+//        pnlComponentsjava.awt.GridBagLayout
     }
 }

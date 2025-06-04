@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class InfoBoard extends JPanel {
 
-    private JPanel pnlcomponent = new JPanel(new GridBagLayout());
+    private JPanel pnlComponent = new JPanel(new GridBagLayout());
     private GridBagConstraints gbc = new GridBagConstraints();
 
     //Kaks kirja stiili
@@ -30,15 +30,23 @@ public class InfoBoard extends JPanel {
     private JButton btnScoreBoard;
 
     //TODO Edetabeliga seotud asjad
+    private JRadioButton rdoFile; //info loetakse failist
+    private JRadioButton rdoDb; //info loetakse andmebaasist
+    private ButtonGroup btnGroup = new ButtonGroup(); //mõlemad rdo nupud on siin
+    private JCheckBox chkWhere; //eraldi aknas linnuke
+
+
+
 
 
     public InfoBoard() {
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+        //setLayout(new FlowLayout(FlowLayout.LEFT)); //See on algne Layout
+        setLayout(new BorderLayout());
         setPreferredSize(new Dimension(400, 188));
         setBackground(new Color(178, 241, 213));
 
         //sellele paneelile lähevad kõik komponendid
-        pnlcomponent.setBackground(new Color(230, 237, 213));
+        pnlComponent.setBackground(new Color(230, 237, 213));
 
         gbc.anchor = GridBagConstraints.WEST; //=17 joondamine vasakule
         gbc.insets = new Insets(2, 2, 2, 2); // Ümber teksti 2 px tühjust
@@ -51,10 +59,25 @@ public class InfoBoard extends JPanel {
         setupLine6();
         setupComboBox();
         setupButtons();
+        setupRadioButtons();
 
 
-        add(pnlcomponent);
+        //Tühja osa täitmine mis on veniv
+        gbc.gridx = 0;
+        gbc.gridy = 12;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        JPanel flowPanel = new JPanel();
+        flowPanel.setOpaque(false);
+        pnlComponent.add(flowPanel, gbc);
+
+        add(pnlComponent, BorderLayout.CENTER);
+
     }
+
+
 
 
     private void setupLine1() {
@@ -63,14 +86,14 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0; //veerg
         gbc.gridy = 0; //rida
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         //esimese  rea teine veerg
         lblMouseXY = new JLabel("x = 0 & y = 0 ");
         lblMouseXY.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        pnlcomponent.add(lblMouseXY, gbc);
+        pnlComponent.add(lblMouseXY, gbc);
     }
 
     private void setupLine2() {
@@ -78,13 +101,13 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         lblID = new JLabel("Teadmata");
         lblID.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        pnlcomponent.add(lblID, gbc);
+        pnlComponent.add(lblID, gbc);
     }
 
     private void setupLine3() {
@@ -92,13 +115,13 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0;
         gbc.gridy = 2;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         lblRowCol = new JLabel("0 : 0");
         lblRowCol.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        pnlcomponent.add(lblRowCol, gbc);
+        pnlComponent.add(lblRowCol, gbc);
 
 
     }
@@ -108,13 +131,13 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         lblTime = new JLabel("00:00");
         lblTime.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        pnlcomponent.add(lblTime, gbc);
+        pnlComponent.add(lblTime, gbc);
     }
 
     private void setupLine5() {
@@ -122,13 +145,13 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0;
         gbc.gridy = 4;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         lblShip = new JLabel("0 / 0");
         lblShip.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 4;
-        pnlcomponent.add(lblShip, gbc);
+        pnlComponent.add(lblShip, gbc);
 
     }
 
@@ -137,13 +160,13 @@ public class InfoBoard extends JPanel {
         label.setFont(fontBold);
         gbc.gridx = 0;
         gbc.gridy = 5;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         lblGameBoard = new JLabel("10 x 10");
         lblGameBoard.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 5;
-        pnlcomponent.add(lblGameBoard, gbc);
+        pnlComponent.add(lblGameBoard, gbc);
 
     }
 
@@ -153,14 +176,14 @@ public class InfoBoard extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 6;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         cmbSize = new JComboBox<>(boardSizes);
         cmbSize.setFont(fontNormal);
         cmbSize.setPreferredSize(new Dimension(106, 28));
         gbc.gridx = 1;
         gbc.gridy = 6;
-        pnlcomponent.add(cmbSize, gbc);
+        pnlComponent.add(cmbSize, gbc);
     }
 
     private void setupButtons() {
@@ -173,23 +196,71 @@ public class InfoBoard extends JPanel {
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
-        pnlcomponent.add(label, gbc);
+        pnlComponent.add(label, gbc);
 
         btnNewGame = new JButton("Uus mäng");
         btnNewGame.setFont(fontNormal);
         gbc.gridx = 1;
         gbc.gridy = 7;
         gbc.gridheight = 1;
-        pnlcomponent.add(btnNewGame, gbc);
+        pnlComponent.add(btnNewGame, gbc);
 
         btnScoreBoard = new JButton("Edetabel");
         btnScoreBoard.setFont(fontNormal);
-        btnScoreBoard.setPreferredSize(new Dimension(106, 28));
+        //btnScoreBoard.setPreferredSize(new Dimension(150, 28));
         gbc.gridx = 1;
         gbc.gridy = 8;
-        pnlcomponent.add(btnScoreBoard, gbc);
+        pnlComponent.add(btnScoreBoard, gbc);
 
 
     }
+    private void setupRadioButtons() {
+        JLabel label = new JLabel("Edetabeli Sisu");
+        label.setFont(fontBold);
+        label.setPreferredSize(new Dimension(106, 28));
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        pnlComponent.add(label, gbc);
 
+
+        rdoFile = new JRadioButton("Fail");
+        rdoFile.setFont(fontNormal);
+        rdoFile.setSelected(true);
+        rdoFile.setBackground(new Color(230, 237, 213));
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        pnlComponent.add(rdoFile, gbc);
+
+        rdoDb = new JRadioButton("Andmebaas");
+        rdoDb.setFont(fontNormal);
+        rdoDb.setBackground(new Color(230, 237, 213));
+        gbc.gridx = 1;
+        gbc.gridy = 10;
+        pnlComponent.add(rdoDb, gbc);
+
+
+
+        chkWhere = new JCheckBox("Eraldi aknas");
+        chkWhere.setFont(fontNormal);
+        chkWhere.setBackground(new Color(230, 237, 213));
+        chkWhere.setSelected(true);
+        gbc.gridx = 1;
+        gbc.gridy = 11;
+        pnlComponent.add(chkWhere, gbc);
+
+        btnGroup.add(rdoFile);
+        btnGroup.add(rdoDb);
+
+
+
+
+    }
+    //GETTERS
+
+
+    public JPanel getPnlComponent() {
+        return pnlComponent;
+
+
+    }
 }
