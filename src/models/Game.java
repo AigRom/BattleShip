@@ -7,8 +7,8 @@ public class Game {
     private int boardSize; // mängulaeva suurus vaikimisi 10x10
     private int [][] boardMatrix; // mängulaual asuvad laevad
     private Random random = new Random();
-    //private int[] ships = {4, 3, 3, 2, 2, 2, 1}; //laeva pikkused(US)
-    private int[] ships = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1}; //(EE)
+    private int[] ships = {4, 3, 3, 2, 2, 2, 1}; //laeva pikkused(US)
+    //private int[] ships = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1}; //(EE)
     //private int[] ships = {5,4, 4, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1}; //(EE++)
     private int shipsCounter = 0;
     private int clickCounter = 0;
@@ -58,7 +58,7 @@ public class Game {
                     int c = (startCol + cOffset) % boardSize;
 
                     boolean vertical = random.nextBoolean(); //Määrame juhusliku suuna /true = vertical
-                    if(tryPlaceShip(r, c, length, vertical || tryPlaceShip(r, c, length, !vertical))) {
+                    if(tryPlaceShip(r, c, length, vertical)|| tryPlaceShip(r, c, length, !vertical)) {
                         placed = true; //laev paigutatud
                         break outerLoop;//katkestab for loop kordused
                     }
@@ -126,7 +126,7 @@ public class Game {
         // kontrollime et kuskil pole tühjust (0), katkestame
         for(int r = area.startRow; r <= area.endRow; r++) {
             for(int c = area.startCol; c <= area.endCol; c++) {
-                if(boardMatrix[r][c] != 0) return false;
+                if(boardMatrix[r][c] > 0 && boardMatrix[r][c] <= 5) return false;
             }
         }
         return true;
@@ -139,6 +139,20 @@ public class Game {
         int startCol = Math.max(0, col - 1);
         int endCol = Math.min(boardSize - 1, vertical ? col + 1 : col + length);
         return new Area(startRow, endRow, startCol, endCol);
+    }
+
+    /**
+     * selles lahtris klikkis kasutaja hiirega, kas sai pihta või läks mööda
+     * @param row rida
+     * @param col   veerg
+     * @param what millega tegu (7 või 8)
+     */
+    public void setUserClick(int row, int col, int what) {
+        if(what == 7) {
+            boardMatrix[row][col] = 7; // pihtas
+        } else if (what == 8){
+            boardMatrix[row][col] = 8; // möödas
+        }
     }
 
     //Getters
@@ -158,5 +172,27 @@ public class Game {
 
     public int getShipsParts() {
         return IntStream.of(ships).sum();
+    }
+
+    /**
+     * Kas mäng on läbi
+     * @return true kui on läbi ja false kui ei ole läbi
+     */
+    public boolean isGameOver() {
+        return getShipsCounter() == getShipsParts();
+    }
+
+    //SETTERS
+
+    /**
+     * Suurendab leitud laevade arvu, etteantud väärtuse võrra
+     * @param shipsCounter etteantud väärtuys (1)
+     */
+    public void setShipsCounter(int shipsCounter) {
+        this.shipsCounter += shipsCounter;
+    }
+
+    public void setClickCounter(int clickCounter) {
+        this.clickCounter += clickCounter;
     }
 }

@@ -109,5 +109,9 @@ public class View  extends JFrame {
 
     }
 
+    public void registerScoreBoardButton(ActionListener actionListener) {
+        infoBoard.getBtnScoreBoard().addActionListener(actionListener);
+    }
+
 
 }
