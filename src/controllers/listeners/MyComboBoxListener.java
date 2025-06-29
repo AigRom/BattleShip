@@ -10,28 +10,37 @@ public class MyComboBoxListener implements ItemListener {
     private Model model;
     private View view;
 
-
-
+    // Konstruktor: seob mudeli ja vaate
     public MyComboBoxListener(Model model, View view) {
         this.model = model;
         this.view = view;
-
-
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-       //System.out.println(e.getItem()); //Test
+        // Kontrollime, kas kasutaja valis uue väärtuse rippmenüüst
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            //System.out.println(e.getItem()); //Test
-            String number = e.getItem().toString(); // Võta väärtus stringina
-            int size = Integer.parseInt(number); // Tee eelnev nr. string => täisarvuks
-            view.getLblGameBoard().setText(String.format("%d x %d", size, size));
-            //view.getLblGameBoard().setText(number + " x " + number);
-            model.setBoardSize(size); //määrab mängulaua suuruse
-            view.pack(); // Et suurus muutuks
-            view.repaint(); //joonista uuesti
 
+            // Kui mingi mäng on olemas (olgu läbi või katkestatud), kustutame selle,
+            // et mängulaud ei jääks ekraanile nähtavale
+            if(model.getGame() != null) {
+                model.setGame(null);
+            }
+
+            // Loeme valitud laua suuruse stringina ja teisendame täisarvuks
+            String number = e.getItem().toString();
+            int size = Integer.parseInt(number);
+
+            // Uuendame infot kasutajaliideses (näiteks: 10 x 10)
+            view.getLblGameBoard().setText(String.format("%d x %d", size, size));
+
+            // Määrame uue mängulaua suuruse mudelis
+            model.setBoardSize(size);
+
+            // Kohandame GUI mõõdud ja joonistame uuesti
+            view.pack();
+            view.updateBoardSize();
+            view.repaint();
         }
     }
 }

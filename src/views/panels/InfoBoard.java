@@ -36,9 +36,6 @@ public class InfoBoard extends JPanel {
     private JCheckBox chkWhere; //eraldi aknas linnuke
 
 
-
-
-
     public InfoBoard() {
         //setLayout(new FlowLayout(FlowLayout.LEFT)); //See on algne Layout
         setLayout(new BorderLayout());

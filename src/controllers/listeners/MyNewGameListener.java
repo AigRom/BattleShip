@@ -31,6 +31,8 @@ public class MyNewGameListener implements ActionListener {
                 view.getLblShip().setText(model.getGame().getShipsCounter() + " / " + model.getGame().getShipsParts());
                 SwingUtilities.invokeLater(() -> {
                     view.getBtnNewGame().setText("Katkesta mäng");
+                    view.getBtnScoreBoard().setEnabled(false); //edetabeli nupp halliks, kui uus mäng algab
+                    view.getCmbSize().setEnabled(false); //mängulaua suuruse muutmine deaktktiveeritud
                     gameTimer.start();
                 });
 
@@ -41,6 +43,8 @@ public class MyNewGameListener implements ActionListener {
         else {
             gameTimer.stop();
             view.getBtnNewGame().setText("Uus mäng");
+            view.getBtnScoreBoard().setEnabled(true); //edetabeli nupp aktiivseks tagasi
+            view.getCmbSize().setEnabled(true); // mängulaua suuruse valik tagasi aktiivseks
 
         }
     }

@@ -21,12 +21,16 @@ public class GameBoard extends JPanel {
 
     }
 
+
+
+
     @Override
     public Dimension getPreferredSize() {
         int w = (width * model.getBoardSize()) + width + (2 * startX);
         int h = (height * model.getBoardSize()) + height + (2 * startY);
         return new Dimension(w, h);
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -43,7 +47,8 @@ public class GameBoard extends JPanel {
         drawRowColumn(g);
 
         // TODO pole kõige parem lahendus
-        if(model.getGame() != null && !model.getGame().isGameOver()) {
+        //if(model.getGame() != null && !model.getGame().isGameOver()) {
+        if(model.getGame() != null) { //Nii jääb mängu seis peale mängu lõppemist ekraanile
             model.drawUserBoard(g);
 
         }

@@ -201,6 +201,10 @@ public class Model {
     //SETTERID
 
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public void setBoardSize(int boardSize) {
         this.boardSize = boardSize;
     }

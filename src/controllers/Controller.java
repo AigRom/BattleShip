@@ -79,6 +79,8 @@ public class Controller implements MouseListener, MouseMotionListener {
             gameTimer.stop();
             view.getBtnNewGame().setText("Uus mäng"); //Muuda nupu tekst Katkesta mäng => Uus mäng
             //JOptionPane.showMessageDialog(view, "Mängu aeg" + gameTimer.formatGameTime());
+            view.getBtnScoreBoard().setEnabled(true);//Edetabeli nupp aktiivseks tagasi
+            view.getCmbSize().setEnabled(true);// Mängualaua suuruse valik tagasi aktiivseks
 
             //Küsime mängija nime
             String name = JOptionPane.showInputDialog(view, "Kuidas on admirali nimi?", "Mäng on läbi", JOptionPane.INFORMATION_MESSAGE);

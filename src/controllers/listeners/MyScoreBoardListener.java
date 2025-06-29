@@ -164,9 +164,39 @@ public class MyScoreBoardListener implements ActionListener {
         return false;
     }
     private void setupDlgScoreBoard() {
-        dlgScoreBoard.setModal(true); //teise akna peal
-        dlgScoreBoard.pack();
-        dlgScoreBoard.setLocationRelativeTo(null); //Paigutame keset ekraani
-        dlgScoreBoard.setVisible(true); //tee nähtavaks
+        if (!view.getChkWhere().isSelected()) {
+            // Edetabel mängulaua peale
+
+            JTable table = (JTable) ((JScrollPane) dlgScoreBoard.getContentPane().getComponent(0)).getViewport().getView();
+
+            JButton closeBtn = new JButton("Sulge edetabel");
+            closeBtn.addActionListener(e -> {
+                view.getScorePanel().setVisible(false);
+                view.getBtnNewGame().setEnabled(true); // Aktiveeri nupp tagasi
+                view.getCmbSize().setEnabled(true);// Aktiveeri mängulaua suuruse valik
+                view.repaint();
+            });
+
+            views.panels.ScoreBoard scoreBoardPanel = new views.panels.ScoreBoard(table, closeBtn);
+
+            JPanel panel = view.getScorePanel();
+            panel.removeAll();
+            panel.add(scoreBoardPanel);
+            panel.setVisible(true);
+
+            view.getBtnNewGame().setEnabled(false); // Deaktiveeri „Uus mäng” nupp
+            view.getCmbSize().setEnabled(false); // deaktiveeri mängulaua suuruse valik
+            view.revalidate();
+            view.repaint();
+
+        } else {
+            // Edetabel eraldi aknas
+            dlgScoreBoard.setModal(true);
+            dlgScoreBoard.pack();
+            dlgScoreBoard.setLocationRelativeTo(null);
+            dlgScoreBoard.setVisible(true);
+        }
+
     }
+
 }
