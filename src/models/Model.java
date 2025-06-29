@@ -88,7 +88,7 @@ public class Model {
 
             switch (cellvalue) {
                 case 0:
-                    color = new Color(0, 190, 255);
+                    color = new Color(86, 172, 205);
                     break;
                 case 7:
                     color = Color.GREEN;
@@ -100,7 +100,7 @@ public class Model {
                 default:
                     if (cellvalue >= 1 && cellvalue <= 5) {
                         //kommenteeri välja kui ei soovi mängu ajal laevu näha
-                        color = Color.YELLOW;
+                        //color = Color.YELLOW;
                     }
             }
             // Kui värv on määratud joonista ruut.
