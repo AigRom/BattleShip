@@ -48,9 +48,14 @@ public class GameBoard extends JPanel {
 
         // TODO pole kõige parem lahendus
         //if(model.getGame() != null && !model.getGame().isGameOver()) {
-        if(model.getGame() != null) { //Nii jääb mängu seis peale mängu lõppemist ekraanile
-            model.drawUserBoard(g);
+        //if(model.getGame() != null) { //Nii jääb mängu seis peale mängu lõppemist ekraanile
+            //model.drawUserBoard(g);
 
+        //}
+
+        // Kui mäng on olemas ja ei ole lõppenud, siis joonistatakse mänguseis
+        if (model.getGame() != null && !model.getGame().isGameOver()) {
+            model.drawUserBoard(g);
         }
 
 

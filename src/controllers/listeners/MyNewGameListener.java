@@ -40,12 +40,28 @@ public class MyNewGameListener implements ActionListener {
 
 
         }
+        //Mängu seis jääbpeale mängu lõppu mängulauale
+        //else {
+            //gameTimer.stop();
+            //view.getBtnNewGame().setText("Uus mäng");
+            //view.getBtnScoreBoard().setEnabled(true); //edetabeli nupp aktiivseks tagasi
+            //view.getCmbSize().setEnabled(true); // mängulaua suuruse valik tagasi aktiivseks
+
+        //Mänguseis kaob peale mängu laualt
+        //}
         else {
             gameTimer.stop();
-            view.getBtnNewGame().setText("Uus mäng");
-            view.getBtnScoreBoard().setEnabled(true); //edetabeli nupp aktiivseks tagasi
-            view.getCmbSize().setEnabled(true); // mängulaua suuruse valik tagasi aktiivseks
 
+            model.setGame(null);
+            view.getLblShip().setText("0 / 0");
+
+            view.getBtnNewGame().setText("Uus mäng");
+            view.getBtnScoreBoard().setEnabled(true);
+            view.getCmbSize().setEnabled(true);
+
+            view.getGameBoard().repaint();
         }
+
+
     }
 }

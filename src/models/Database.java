@@ -43,8 +43,14 @@ public class Database implements AutoCloseable {
     }
 
     private void connect() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("SQLite JDBC driver puudub. Kontrolli, kas sqlite-jdbc.jar on lisatud projekti dependencies alla.", e);
+        }
+
         connection = DriverManager.getConnection(dbUrl);
-        System.out.println("ühendus loodud: " + dbUrl); //TEST
+        System.out.println("ühendus loodud: " + dbUrl);
     }
 
 
