@@ -99,7 +99,7 @@ public class Model {
                     break;
                 default:
                     if (cellvalue >= 1 && cellvalue <= 5) {
-                        //kommenteeri välja kui ei soovi mängu ajal laevu näha
+                        //kommenteeri välja kui ei soovi mängu ajal laevu näha Arenduse jaoks tehtud !
                         //color = Color.YELLOW;
                     }
             }

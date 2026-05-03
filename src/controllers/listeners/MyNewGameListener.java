@@ -49,6 +49,8 @@ public class MyNewGameListener implements ActionListener {
 
         //Mänguseis kaob peale mängu laualt
         //}
+
+        //Kustutab laevad peale mängu lõppu mänguväljalt ---vaata ka GameBoard
         else {
             gameTimer.stop();
 

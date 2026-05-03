@@ -53,7 +53,7 @@ public class GameBoard extends JPanel {
 
         //}
 
-        // Kui mäng on olemas ja ei ole lõppenud, siis joonistatakse mänguseis
+        // Kui mäng on olemas ja ei ole lõppenud, siis joonistatakse mänguseis. Mängu lõppedes seis kaob vt ka MyNewGameListener
         if (model.getGame() != null && !model.getGame().isGameOver()) {
             model.drawUserBoard(g);
         }
